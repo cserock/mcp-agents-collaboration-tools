@@ -1,0 +1,54 @@
+{
+  "name": "mcp-mermaid-img",
+  "version": "1.0.1",
+  "type": "module",
+  "description": "MCP tool for converting Mermaid diagram code to image URL or file",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "mcp-mermaid-img": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "chmod +x ./dist/cli.js",
+    "start": "node dist/cli.js",
+    "pub": "npm version patch && npm publish --access public"
+  },
+  "keywords": [
+    "mcp",
+    "mermaid",
+    "diagram",
+    "image",
+    "converter",
+    "claude",
+    "anthropic"
+  ],
+  "author": {
+    "name": "Jason",
+    "email": "gkctou@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gkctou/mcp-mermaid-img"
+  },
+  "bugs": {
+    "url": "https://github.com/gkctou/mcp-mermaid-img/issues"
+  },
+  "homepage": "https://github.com/gkctou/mcp-mermaid-img#readme",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.3",
+    "js-base64": "^3.7.7",
+    "pako": "^2.1.0",
+    "zod": "^3.22.4",
+    "zod-to-json-schema": "^3.22.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/pako": "^2.0.3",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

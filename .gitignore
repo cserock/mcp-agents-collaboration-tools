@@ -6,3 +6,6 @@
 *.egg-info/
 *.pyc
 .DS_Store
+.cursor
+system_prompt_example.yaml
+.idea

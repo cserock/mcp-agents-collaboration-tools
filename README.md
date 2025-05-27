@@ -1,4 +1,4 @@
-# LangGraph Dynamic MCP Agents
+# MCP Agents with Collaboration Tools
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
 ![LangChain](https://img.shields.io/badge/LangChain-0.3.23+-green.svg)
@@ -7,73 +7,76 @@
 
 ## 프로젝트 개요
 
-> 채팅 인터페이스
+`MCP Agents with Collaboration Tools`는 Model Context Protocol(MCP)기반으로 현업에서 주로 사용하는 협업 도구를 포함한 프로젝트입니다. 
+이 프로젝트는 Teddy님의 `LangGraph Dynamic MCP Agents` 프로젝트를 기반으로 합니다.
 
-![Project Overview](./assets/Project-Overview.png)
+### 목표
+개인이 사용한다면 smithery로 간단하게 설치해서 사용하는 것이 가능하지만 조직에서 구성원들과 함께 사용할 Agent를 구현시에는 권한 문제나 보안 관련 요구사항들이 발생합니다.
+이러한 문제를 해결하기 위해 tool의 코드를 리뷰하고 요구사항 구현이 필요하기 때문에 local에 설치해서 stdio 방식으로 실행합니다.
+또한, 코드 레벨에서 사용하는 tool을 선별할 수 있기 때문에 적절한 수의 tool을 사용할 수 있어 성능에 기여합니다.  
+이 프로젝트에 연동된 협업 도구들은 같은 목적의 도구들과 비교해서 실제 동작하고 혹시 모를 어뷰징이 없는 것으로 선택했으며 현업에 사용하고 있습니다.
 
-`LangGraph Dynamic MCP Agents` 은 Model Context Protocol(MCP)을 통해 다양한 외부 도구와 데이터 소스에 접근할 수 있는 ReAct 에이전트를 구현한 프로젝트입니다. 이 프로젝트는 LangGraph 의 ReAct 에이전트를 기반으로 하며, MCP 도구를 쉽게 추가하고 구성할 수 있는 인터페이스를 제공합니다.
+### 연동된 협업 도구
+* **Notion** : 노션(Notion) 페이지, 데이터베이스, 블록 조회 및 수정 등
+* **Slack** : 채널 메시지 조회, 전송, 반응 추가 등
+* **Github** : 저장소, 이슈, PR, 코드, 사용자 검색 및 상세 정보 조회
+* **MySQL(DB)** : MySQL 데이터베이스 쿼리 실행 (읽기 전용)
+* **Chart** : 다양한 차트(막대, 선, 원형, 히스토그램 등) 생성
+* **Mermaid** : 순서도 및 다이어그램 생성
 
-![Project Demo](./assets/MCP-Agents-TeddyFlow.png)
+![Project Demo](./assets/mcp-agent-with-collaboration-tools-intro.png)
 
-### 주요 기능
- 
-**동적 방식으로 도구 설정 대시보드**
+### 협업 도구 활용 예제
+```bash
+[Slack]
+- slack을 사용해서 XXXX 채널에 오늘 작성된 메시지를 요약해줘
 
-`http://localhost:2025` 에 접속하여 도구 설정 대시보드를 확인할 수 있습니다.
+[MySQL(DB)]
+- mysql을 사용해서 users 테이블의 last_login_date 컬럼을 참고해서 오늘 로그인한 활성사용자 수를 알려줘 
 
-![Tool Settings](./assets/Tools-Settings.png)
+[Mermaid(순서도 작성)]
+- mermaid를 사용해서 중고물품거래 플랫폼에서 사용자의 거래 과정을 순서도로 그려줘
 
-**도구 추가** 탭에서 [Smithery](https://smithery.io) 에서 사용할 MCP 도구의 JSON 구성을 복사 붙여넣기 하여 도구를 추가할 수 있습니다.
+[Notion + Slack]
+- notion을 사용해서 제목이 'XXXXXX'인 페이지를 찾고 내용을 요약해줘
+- 요약한 메시지를 XXXX 채널에 작성해줘
 
-![Tool Settings](./assets/Add-Tools.png)
+[Github + Notion]
+- github를 사용해서 XXXXX repo에서 최근 커밋된 내용과 작성자를 찾아줘
+- 수정된 파일 링크를 리스트로 보여주고 notion을 사용해서 'XXXX repo 커밋 현황'이라는 제목으로 페이지를 작성해줘
 
-----
+[MySQL(DB) + Chart]
+- mysql을 사용해서 products 테이블의 total_price 컬럼을 참고해서 판매금액 상위 5개 상품 이름과 가격을 알려줘
+- 이 정보를 참고해서 chart를 사용해서 pi chart를 그려줘
 
-**실시간 반영**
-
-도구 설정 대시보드에서 도구를 추가하거나 수정하면 실시간으로 반영됩니다.
-
-![List Tools](./assets/List-Tools.png)
-
-**시스템 프롬프트 설정**
-
-`prompts/system_prompt.yaml` 파일을 수정하여 시스템 프롬프트를 설정할 수 있습니다.
-
-이 또한 동적으로 바로 반영되는 형태입니다.
-
-![System Prompt](./assets/System-Prompt.png)
-
-만약, 에이전트에 설정되는 시스템프롬프트를 수정하고 싶다면 `prompts/system_prompt.yaml` 파일의 내용을 수정하면 됩니다.
-
-----
-
-### 주요 기능
-
-* **LangGraph ReAct 에이전트**: LangGraph를 기반으로 하는 ReAct 에이전트
-* **실시간 동적 도구 관리**: MCP 도구를 쉽게 추가, 제거, 구성 가능 (Smithery JSON 형식 지원)
-* **실시간 동적 시스템 프롬프트 설정**: 시스템 프롬프트를 쉽게 수정 가능 (동적 반영)
-* **대화 기록**: 에이전트와의 대화 내용 추적 및 관리
-* **TeddyFlow 연동**: 채팅 인터페이스 연동
-* **Docker 이미지 빌드**: Docker 이미지 빌드 가능
-* **localhost 지원**: localhost 로 실행 가능(채팅 인터페이스 연동 가능)
+[Notion + mermaid(순서도 작성)]
+- notion을 사용해서 제목이 'XXXXXX'인 페이지를 찾아줘
+- 문서 본문에서 '유저 플로우' 관련 내용을 찾고 순서도로 그려줘
+```
 
 ## 설치 방법
 
 1. 저장소 복제하기
 
 ```bash
-git clone https://github.com/teddynote-lab/langgraph-dynamic-mcp-agents
-cd langgraph-dynamic-mcp-agents
+git clone https://github.com/cserock/mcp-agents-with-collaboration-tools.git
+cd mcp-agents-with-collaboration-tools
 ```
 
-2. `.env` 파일 설정하기
+2. tool 설치 (resources 디렉토리 하위의 각 tool에 대해 아래 작업을 실행합니다. 단, mcp-server-chart, mcp-server-mermaid 2개의 툴은 해당 사항이 없습니다.)
 
-`.env.example` 파일을 `.env`로 복사하고 필요한 API 키를 추가합니다.
-
+`.env.example` 파일을 `.env`로 복사하고 필요한 API 키나 설정을 추가합니다.
 ```bash
 cp .env.example .env
 ```
+라이브러리를 설치하고 빌드합니다.
+```bash
+npm install
+npm run build
+```
 
+## Agent 실행 준비
+### 1. LLM 설정 
 `.env` 파일에서 `LLM_PROVIDER` 를 설정합니다.
 
 선택 가능(택 1): `ANTHROPIC`, `OPENAI`, `AZURE_OPENAI`
@@ -91,13 +94,15 @@ LLM_PROVIDER=AZURE_OPENAI
 - `AZURE_OPENAI_API_KEY`: Azure OpenAI API 키
 - `AZURE_OPENAI_ENDPOINT`: Azure OpenAI 엔드포인트
 
+### 2. Prompt 수정
+prompts 디렉토리 하위의  `system_prompt.yaml`를 각 협업 도구 설정에 맞게 프롬프트를 작성합니다.
 
-3. MCP 도구 설정
+### 3. MCP 도구 설정
 
 `mcp-config` 폴더에 있는 `mcp_config.json` 파일을 기준으로 모델이 사용할 MCP 도구를 설정합니다.
-
 따라서, 미리 사용하고자 하는 MCP 도구를 JSON 형식으로 설정해 둘 수 있습니다.
 이 과정은 도구 설정 대시보드에서도 설정이 가능합니다.
+참고로, 협업 도구들의 설정은 이미 작성되어 있습니다.
 
 아래는 샘플로 작성된 예시입니다.
 
@@ -127,46 +132,7 @@ LLM_PROVIDER=AZURE_OPENAI
 }
 ```
 
-4. .py 파일을 MCP `stdio` 서버로 추가
-
-- (참고) `resources` 폴더에 있는 `mcp_server_time.py` 파일을 참고하시기 바랍니다.
-
-1. 사용하고자 하는 커스텀 작성된 .py 파일을 `resources` 폴더에 추가합니다. 그리고 `stdio` 서버로 실행할 수 있도록 코드를 작성합니다.
-
-2. `mcp-config/mcp_config.json` 에 추가할 때 파일 경로를 수정합니다.
-
-    **규칙**
-
-    `./resources/파일명.py` > `/app/resources/파일명.py`
-
-    예를 들어, `./resources/mcp_server_time.py` 파일을 추가하고자 한다면 `/app/resources/mcp_server_time.py` 로 설정합니다.
-
-    ```json
-    "get_current_time": {
-        "command": "python",
-        "args": [
-        "/app/resources/mcp_server_time.py"
-        ],
-        "transport": "stdio"
-    }
-    ```
-
-6. Smithery 에 등록된 도구 추가
-
-[Smithery](https://smithery.ai/) 에서 사용할 MCP 도구의 JSON 구성을 가져와 도구 대시보드에서 쉽게 추가할 수 있습니다.
-
-1. [Smithery](https://smithery.io) 웹사이트를 방문하여 사용하고 싶은 도구를 선택합니다.
-2. 도구 페이지에서 오른쪽의 'COPY' 버튼을 클릭하여 JSON 구성을 복사합니다.
-
-![Smithery Copy JSON](./assets/smithery-copy-json.png)
-
-3. `mcp_config.json` 파일을 열고 복사한 JSON을 추가합니다.
-
-> 복사한 내용을 붙여넣기 합니다.
-
-![Add Smithery Tool](./assets/Add-Smithery-Tool.png)
-
-## 애플리케이션 실행
+## Agent 실행
 
 모든 설정이 완료되었다면, 다음 명령어로 실행할 수 있습니다.
 

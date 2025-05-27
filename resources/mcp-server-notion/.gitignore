@@ -1,0 +1,17 @@
+node_modules/
+build/
+dist
+bin/
+
+.cache
+.yarn/cache
+.eslintcache
+
+.cursor
+
+.DS_Store
+
+# Package
+package-lock.json
+pnpm-lock.yaml
+bun.lock
