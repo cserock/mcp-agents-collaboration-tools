@@ -69,7 +69,7 @@ cd mcp-agents-collaboration-tools
 ```bash
 cp .env.example .env
 ```
-라이브러리를 설치하고 빌드합니다.
+3. 라이브러리를 설치하고 빌드합니다.
 ```bash
 npm install
 npm run build
