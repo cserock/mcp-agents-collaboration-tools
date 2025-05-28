@@ -22,7 +22,7 @@
 * **Github** : 저장소, 이슈, PR, 코드, 사용자 검색 및 상세 정보 조회
 * **MySQL(DB)** : MySQL 데이터베이스 쿼리 실행 (읽기 전용)
 * **Chart** : 다양한 차트(막대, 선, 원형, 히스토그램 등) 생성
-* **Mermaid** : 순서도 및 다이어그램 생성
+* **Mermaid** : 순서도 및 다이어그램 생성 (생성 실패시 https://mermaid.ink 서버 상태 확인 필요)
 
 ![Project Demo](./assets/mcp-agent-with-collaboration-tools-intro.png)
 
