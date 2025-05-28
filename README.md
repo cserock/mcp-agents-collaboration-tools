@@ -14,7 +14,7 @@
 개인이 사용한다면 smithery로 간단하게 설치해서 사용하는 것이 가능하지만 조직에서 구성원들과 함께 사용할 Agent를 구현시에는 권한 문제나 보안 관련 요구사항들이 발생합니다.
 이러한 문제를 해결하기 위해 tool의 코드를 리뷰하고 요구사항 구현이 필요하기 때문에 local에 설치해서 stdio 방식으로 실행합니다.
 또한, 코드 레벨에서 사용하는 tool을 선별할 수 있기 때문에 적절한 수의 tool을 사용할 수 있어 성능에 기여합니다.  
-이 프로젝트에 연동된 협업 도구들은 같은 목적의 도구들과 비교해서 실제 동작하고 혹시 모를 어뷰징이 없는 것으로 선택했으며 현업에 사용하고 있습니다.
+이 프로젝트에 연동된 협업 도구들은 같은 목적의 도구들과 비교해서 실제 동작하고 혹시 모를 어뷰징이 없는 것으로 선택했으며 현재 저희팀에서 사용하고 있습니다.
 
 ### 연동된 협업 도구
 * **Notion** : 노션(Notion) 페이지, 데이터베이스, 블록 조회 및 수정 등
@@ -59,8 +59,8 @@
 1. 저장소 복제하기
 
 ```bash
-git clone https://github.com/cserock/mcp-agents-with-collaboration-tools.git
-cd mcp-agents-with-collaboration-tools
+git clone https://github.com/cserock/mcp-agents-collaboration-tools
+cd mcp-agents-collaboration-tools
 ```
 
 2. tool 설치 (resources 디렉토리 하위의 각 tool에 대해 아래 작업을 실행합니다. 단, mcp-server-chart, mcp-server-mermaid 2개의 툴은 해당 사항이 없습니다.)
@@ -95,7 +95,13 @@ LLM_PROVIDER=AZURE_OPENAI
 - `AZURE_OPENAI_ENDPOINT`: Azure OpenAI 엔드포인트
 
 ### 2. Prompt 수정
-prompts 디렉토리 하위의  `system_prompt.yaml`를 각 협업 도구 설정에 맞게 프롬프트를 작성합니다.
+prompts 디렉토리 하위의  `system_prompt.yaml`를 각 협업 도구 설정에 필요한 프롬프트를 작성합니다.
+예를 들어 Slack tool의 경우, 작업 대상 채널명과 채널id 정보를 prompt에 추가하면 agent는 보다 효율적으로 tool을 사용할 수 있습니다. 
+```
+- `slack` tool 사용시 다음의 `channel_name:channel_id` 리스트를 참고해서 사용하세요.
+    - 채널명_1:C0XXXXX
+    - 채널명_2:C0YYYYY
+```
 
 ### 3. MCP 도구 설정
 
