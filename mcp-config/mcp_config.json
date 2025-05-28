@@ -6,6 +6,52 @@
         "/app/resources/mcp_server_time.py"
       ],
       "transport": "stdio"
+    },
+    "mcp-server-mysql": {
+      "command": "/usr/bin/node",
+      "args": [
+        "--env-file=/app/resources/mcp-server-mysql/.env",
+        "/app/resources/mcp-server-mysql/dist/index.js"
+      ],
+      "transport": "stdio"
+    },
+    "notion": {
+      "command": "/usr/bin/node",
+      "args": [
+        "--env-file=/app/resources/mcp-server-notion/.env",
+        "/app/resources/mcp-server-notion/bin/cli.mjs"
+      ],
+      "transport": "stdio"
+    },
+    "slack": {
+      "command": "/usr/bin/node",
+      "args": [
+        "--env-file=/app/resources/mcp-server-slack/.env",
+        "/app/resources/mcp-server-slack/dist/index.js"
+      ],
+      "transport": "stdio"
+    },
+    "github": {
+      "command": "/usr/bin/node",
+      "args": [
+        "--env-file=/app/resources/mcp-server-github/.env",
+        "/app/resources/mcp-server-github/dist/index.js"
+      ],
+      "transport": "stdio"
+    },
+    "mcp-mermaid-img": {
+      "command": "/usr/bin/node",
+      "args": [
+        "/app/resources/mcp-server-mermaid/dist/cli.js"
+      ],
+      "transport": "stdio"
+    },
+    "mcp-server-chart": {
+      "command": "/usr/bin/node",
+      "args": [
+        "/app/resources/mcp-server-chart/build/index.js"
+      ],
+      "transport": "stdio"
     }
   }
 }

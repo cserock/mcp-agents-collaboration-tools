@@ -32,7 +32,7 @@
 - slack을 사용해서 XXXX 채널에 오늘 작성된 메시지를 요약해줘
 
 [MySQL(DB)]
-- mysql을 사용해서 users 테이블의 last_login_date 컬럼을 참고해서 오늘 로그인한 활성사용자 수를 알려줘 
+- mysql을 사용해서 users 테이블의 last_logged_in 컬럼을 참고해서 오늘 로그인한 활성사용자 수를 알려줘 
 
 [Mermaid(순서도 작성)]
 - mermaid를 사용해서 중고물품거래 플랫폼에서 사용자의 거래 과정을 순서도로 그려줘
