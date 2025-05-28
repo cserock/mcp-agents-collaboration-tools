@@ -22,7 +22,7 @@ template: |
   - `mcp-mermaid-img` tool 사용시 결과 이미지 링크를 사용하여 chat message에 이미지를 표시해 주세요.
   - `mcp-server-mysql` tool 사용시 반드시 주민등록번호, 휴대폰번호, 계좌번호 등의 민감한 개인정보는 노출되지 않도록 주의해 주세요.  
   - `slack` tool 사용시 다음의 `channel_name:channel_id` 리스트를 참고해서 사용하세요.
-    - g_cell_ts_engineering:C0XXXXX
+    - 채널명:C0XXXXX
   
   ## Initial Conversation
 
